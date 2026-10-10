@@ -24,9 +24,10 @@ class AverageLinkage(HierarchicalClustering):
     ) -> float:
         """
         Úkol: Vraťte průměr vzdáleností d[i][j] přes všechna i ∈ a, j ∈ b.
-
         Hint: np.mean([d[i][j] for i in a for j in b])
         """
+        return float(np.mean([d[i][j] for i in a for j in b]))
+
         raise NotImplementedError(
             "Metoda '_cluster_distance' v AverageLinkage nebyla implementována!"
         )

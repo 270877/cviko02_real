@@ -20,6 +20,8 @@ class SingleLinkage(HierarchicalClustering):
         d: np.ndarray,
     ) -> float:
         """Úkol: Vraťte minimum vzdáleností d[i][j] přes všechna i ∈ a, j ∈ b."""
+        return float(min(d[i][j] for i in a for j in b))
+
         raise NotImplementedError(
             "Metoda '_cluster_distance' v SingleLinkage nebyla implementována!"
         )

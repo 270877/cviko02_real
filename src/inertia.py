@@ -31,6 +31,13 @@ def within_cluster_inertia(data: np.ndarray, labels: np.ndarray) -> float:
             inertia += np.sum(np.linalg.norm(X_k - centroid, axis=1)**2)
             # součet kvadrátů vzdáleností
     """
+    inertia = 0.0
+    for k in np.unique(labels):
+        X_k = data[labels == k]
+        centroid = np.mean(X_k, axis=0)
+        inertia += float(np.sum(np.linalg.norm(X_k - centroid, axis=1) ** 2))
+    return inertia
+
     raise NotImplementedError("Funkce 'within_cluster_inertia' ještě nebyla implementována!")
 
 
@@ -75,4 +82,17 @@ def find_elbow(k_values: list[int], inertias: list[float]) -> int:
     Returns:
         int: Počet shluků odpovídající záhybu v křivce.
     """
+    if len(k_values) < 3:
+        return k_values[0]
+
+        # Výpočet poklesu inercie medzi susednými bodmi (prvé diferencie)
+    inertias_arr = np.array(inertias)
+    diffs = np.diff(inertias_arr)  # záporné hodnoty, pretože inercia klesá
+    diffs_drop = -diffs  # kladné hodnoty veľkosti poklesu
+
+    # Loket zodpovedá mieste s najväčším poklesom (maximum prvej diferencie)
+    # Index v diffs zodpovedá prechodu z k_values[i] na k_values[i+1]
+    elbow_idx = int(np.argmax(diffs_drop))
+    return k_values[elbow_idx]
+
     raise NotImplementedError("Funkce 'find_elbow' ještě nebyla implementována!")

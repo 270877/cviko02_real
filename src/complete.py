@@ -20,6 +20,8 @@ class CompleteLinkage(HierarchicalClustering):
         d: np.ndarray,
     ) -> float:
         """Úkol: Vraťte maximum vzdáleností d[i][j] přes všechna i ∈ a, j ∈ b."""
+        return float(max(d[i][j] for i in a for j in b))
+
         raise NotImplementedError(
             "Metoda '_cluster_distance' v CompleteLinkage nebyla implementována!"
         )

@@ -14,6 +14,12 @@ def ascii_vectorize(words: list[str]) -> np.ndarray:
 
     Příklad: "abc" → [97, 98, 99]
     """
+    matrix = []
+    for word in words:
+        row = [ord(ch) for ch in word] # z pismen ve slovu udela primo "vector" ASCII kodu pismen celeho slova najednou
+        matrix.append(row)
+    return np.array(matrix, dtype=float)
+
     raise NotImplementedError("Funkce 'ascii_vectorize' ještě nebyla implementována!")
 
 
@@ -40,4 +46,28 @@ def keyboard_vectorize(words: list[str]) -> np.ndarray:
     Příklad: 'a' → idx=10 → row=1, col=0  →  příznaky [1, 0]
              'q' → idx=0  → row=0, col=0  →  příznaky [0, 0]
     """
+
+    layout = "qwertzuiopasdfghjklyxcvbnm"
+    matice = []
+
+    for word in words:
+        word_vector = []
+        for ch in word.lower():
+            idx = layout.index(ch)
+
+            if idx < 10:
+                row = 0
+                col = idx
+            elif idx < 19:
+                row = 1
+                col = idx - 10
+            else:
+                row = 2
+                col = idx - 18
+
+            word_vector.extend([row, col])
+
+            matice.append(word_vector)
+
+        return np.array(matice, dtype=float)
     raise NotImplementedError("Funkce 'keyboard_vectorize' ještě nebyla implementována!")
